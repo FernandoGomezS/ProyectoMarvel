@@ -28,9 +28,9 @@ export class DetailsPage {
         creatorstotal = creatorstotal + ', ' + this.comic.creators.items[i].name;
       }
     }
-    
+
     this.comic["creatorsFinal"] = creatorstotal;
-    
+
     var characterstotal;
     x = 0;
     for (var j in this.comic.characters.items) {
@@ -41,14 +41,14 @@ export class DetailsPage {
       else {
         characterstotal = characterstotal + ', ' + this.comic.characters.items[j].name;
       }
-    }
-    
+    }    
     this.comic["charactersFinal"] = characterstotal;
+
     
-  }
 
+  }  
   ionViewDidLoad() {
-
   }
+
 
 }

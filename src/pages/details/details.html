@@ -1,7 +1,6 @@
-
 <ion-header>
   <ion-navbar >
-    <ion-title text-wrap>
+    <ion-title >
       {{ comic.title }}
     </ion-title>
   </ion-navbar>
@@ -14,42 +13,48 @@
   <img [src]="comic.src2"> 
 
   <ion-card-content>
+     <ion-card-title >
+        {{comic.title}}
+      </ion-card-title>
       <span>
        {{comic.description}}
       </span>
     </ion-card-content>
 
     
-  <ion-item text-wrap>
-    <ion-icon name="clipboard" large></ion-icon>
-    <span>Creators:</span>    
+  <ion-item text-wrap >
+    <ion-icon name="clipboard"  large></ion-icon>
+    <span >Creators:</span>    
     <span>{{comic.creatorsFinal}}</span>
   </ion-item>
 
   <ion-item text-wrap>
-    <ion-icon name="ios-people" item-start large></ion-icon>
+    <ion-icon name="people"  large></ion-icon>
     <span>Characters:</span>
     <span>{{comic.charactersFinal}}</span>
   </ion-item>
   
   <ion-item text-wrap>
-    <ion-icon name="calendar" item-left large ></ion-icon>
+    <ion-icon name="calendar" large ></ion-icon>
     <span>Year:</span>
     <span>{{comic.year}}</span>
   </ion-item>
 
   <ion-item text-wrap>
-    <ion-icon name="logo-usd" item-start large></ion-icon>      
+    <ion-icon name="logo-usd"  large></ion-icon>      
     <span>{{comic.prices[0].type}}: {{comic.prices[0].price}}</span>      
   </ion-item>
 
-  <ion-item>
-    <span item-left>18 min</span>
-    <span item-left>(2.6 mi)</span>
-    <button ion-button icon-left clear item-end>
-      <ion-icon name="navigate"></ion-icon>
-      Start
+  <ion-item item-end  >    
+    
+    
+    <button ion-button *ng-if="comprobarURL()" clear item-end large>
+      Buy&nbsp; 
+      <ion-icon name="cart"></ion-icon>
+     
     </button>
+    
+    
   </ion-item>
 
 </ion-card>
