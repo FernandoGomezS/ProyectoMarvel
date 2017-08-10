@@ -44,7 +44,7 @@ export class DetailsPage {
     }
     
     this.comic["charactersFinal"] = characterstotal;
-    console.log(this.comic);
+    
   }
 
   ionViewDidLoad() {

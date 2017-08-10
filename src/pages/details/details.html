@@ -1,7 +1,7 @@
 
 <ion-header>
   <ion-navbar >
-    <ion-title>
+    <ion-title text-wrap>
       {{ comic.title }}
     </ion-title>
   </ion-navbar>
@@ -20,26 +20,25 @@
     </ion-card-content>
 
     
-  <ion-item>
-    <ion-icon name="ios-people" item-start large></ion-icon>
-    <span>Creators:</span>
-    <br>
+  <ion-item text-wrap>
+    <ion-icon name="clipboard" large></ion-icon>
+    <span>Creators:</span>    
     <span>{{comic.creatorsFinal}}</span>
   </ion-item>
 
-  <ion-item>
+  <ion-item text-wrap>
     <ion-icon name="ios-people" item-start large></ion-icon>
     <span>Characters:</span>
     <span>{{comic.charactersFinal}}</span>
   </ion-item>
   
-  <ion-item>
+  <ion-item text-wrap>
     <ion-icon name="calendar" item-left large ></ion-icon>
     <span>Year:</span>
     <span>{{comic.year}}</span>
   </ion-item>
 
-  <ion-item>
+  <ion-item text-wrap>
     <ion-icon name="logo-usd" item-start large></ion-icon>      
     <span>{{comic.prices[0].type}}: {{comic.prices[0].price}}</span>      
   </ion-item>

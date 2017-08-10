@@ -30,8 +30,11 @@ export class HomePage {
           }
           else{
             item.year = item.title.match(/\((.[0-9]*)\)/).pop();
-          }  
-          item.title=item.title.replace(/\((.*)\)/,"");
+          }           
+          item.title=item.title.replace(/\((.*)\)/,"");          
+          if(item.description!=null){
+            item.description=item.description.replace(/(?:<[^>]+>)/gi, '');         
+           }           
           item.src = item.thumbnail.path + "/portrait_small." + item.thumbnail.extension;
           item.src2 = item.thumbnail.path + "/portrait_incredible." + item.thumbnail.extension;
           return item;
