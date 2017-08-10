@@ -23,8 +23,15 @@ export class HomePage {
         this.comics = data.data.results;
 
         this.comics = this.comics.map(item => {
-          //item.year = item.title.match(/\((.*)\)/).pop();  
-          item.year = (new Date(item.dates[0].date)).getFullYear();
+          var validate=/\((.[0-9]*)\)/;
+          //var validate=item.title.match(/\((.[0-9]*)\)/).pop();          
+          if(validate.test(item.title)==false){
+            item.year = (new Date(item.dates[0].date)).getFullYear();
+          }
+          else{
+            item.year = item.title.match(/\((.[0-9]*)\)/).pop();
+          }  
+          item.title=item.title.replace(/\((.*)\)/,"");
           item.src = item.thumbnail.path + "/portrait_small." + item.thumbnail.extension;
           item.src2 = item.thumbnail.path + "/portrait_incredible." + item.thumbnail.extension;
           return item;

@@ -15,6 +15,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class DetailsPage {
   comic;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+
     this.comic = navParams.data.comic;
     var creatorstotal;
     var x = 0;
@@ -24,11 +25,26 @@ export class DetailsPage {
         x++;
       }
       else {
-        creatorstotal = creatorstotal + ", " + this.comic.creators.items[i].name;
+        creatorstotal = creatorstotal + ', ' + this.comic.creators.items[i].name;
       }
     }
-    console.log(creatorstotal);
-    this.comic["creatorsFinal"] = creatorstotal;     
+    
+    this.comic["creatorsFinal"] = creatorstotal;
+    
+    var characterstotal;
+    x = 0;
+    for (var j in this.comic.characters.items) {
+      if (x == 0) {
+        characterstotal = this.comic.characters.items[j].name;
+        x++;
+      }
+      else {
+        characterstotal = characterstotal + ', ' + this.comic.characters.items[j].name;
+      }
+    }
+    
+    this.comic["charactersFinal"] = characterstotal;
+    console.log(this.comic);
   }
 
   ionViewDidLoad() {
