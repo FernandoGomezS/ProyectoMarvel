@@ -1,0 +1,50 @@
+
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>
+      {{ comic.title }}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+<ion-card>
+
+  <img [src]="comic.src2"> 
+
+  <ion-card-content>
+      <ion-card-title>
+        {{comic.title}}
+      </ion-card-title>
+      <p>
+       {{comic.description}}
+      </p>
+    </ion-card-content>
+
+  <ion-item>
+    <ion-icon name="ios-people" item-start large></ion-icon>
+    <h2>Creators:</h2>
+    {{comic.creatorsFinal}}
+  </ion-item>
+
+  <ion-item>
+    <ion-icon name="calendar" item-left large ></ion-icon>
+    <h2>Year:</h2>
+    <p>{{comic.year}}</p>
+  </ion-item>
+
+
+  <ion-item>
+    <span item-left>18 min</span>
+    <span item-left>(2.6 mi)</span>
+    <button ion-button icon-left clear item-end>
+      <ion-icon name="navigate"></ion-icon>
+      Start
+    </button>
+  </ion-item>
+
+</ion-card>
+</ion-content>
+
+
