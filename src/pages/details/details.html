@@ -41,19 +41,21 @@
   </ion-item>
 
   <ion-item text-wrap>
-    <ion-icon name="logo-usd"  large></ion-icon>      
-    <span>{{comic.prices[0].type}}: {{comic.prices[0].price}}</span>      
+    <ion-icon name="logo-usd"  large></ion-icon>
+    Prices   
+    <br>   
+    <span>&nbsp; Print: {{comic.prices[0].price}}</span>
+    <br>
+    <span>&nbsp; Digital: {{comic.prices[1].price}}</span>       
   </ion-item>
 
-  <ion-item item-end  >    
-    
-    
-    <button ion-button *ng-if="comprobarURL()" clear item-end large>
+  <ion-item item-end  >
+    <a item-end [href]="comic.urls[1].url" >
+    <button ion-button icon-left clear item-end large>
       Buy&nbsp; 
-      <ion-icon name="cart"></ion-icon>
-     
+      <ion-icon name="cart"></ion-icon>     
     </button>
-    
+    </a>
     
   </ion-item>
 
