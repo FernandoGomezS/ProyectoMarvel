@@ -1,26 +1,21 @@
-<ion-header>
-  <ion-navbar color="primary">
-    <ion-title>
-      Marvel
+<ion-header >
+  <ion-navbar >
+    <ion-title >
+      <img alt="logo" height="40" src="assets/img/logo.png">
     </ion-title>
   </ion-navbar>
-  <ion-searchbar
-  [(ngModel)]="myInput"
-  [showCancelButton]="shouldShowCancel"
-  (ionInput)="onInput($event)"
-  (ionCancel)="onCancel($event)">
-</ion-searchbar>
+  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+  
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <button ion-item *ngFor="let comic of comics"(click)="openNavDetailsPage(comic)">
+    <button ion-item *ngFor="let comic of comics" (click)="openNavDetailsPage(comic)">
       <ion-thumbnail item-start>
       <img [src]="comic.src">
     </ion-thumbnail>
     <h2>{{ comic.title }}</h2>
-    <p>Year •{{comic.year}}</p>
-    
+    <p>Year •{{comic.year}}</p>    
     </button>
   </ion-list>
 </ion-content>

@@ -1,7 +1,6 @@
-
 <ion-header>
-  <ion-navbar color="primary">
-    <ion-title>
+  <ion-navbar >
+    <ion-title >
       {{ comic.title }}
     </ion-title>
   </ion-navbar>
@@ -14,34 +13,50 @@
   <img [src]="comic.src2"> 
 
   <ion-card-content>
-      <ion-card-title>
+     <ion-card-title >
         {{comic.title}}
       </ion-card-title>
-      <p>
+      <span>
        {{comic.description}}
-      </p>
+      </span>
     </ion-card-content>
 
-  <ion-item>
-    <ion-icon name="ios-people" item-start large></ion-icon>
-    <h2>Creators:</h2>
-    {{comic.creatorsFinal}}
+    
+  <ion-item text-wrap >
+    <ion-icon name="clipboard"  large></ion-icon>
+    <span >Creators:</span>    
+    <span>{{comic.creatorsFinal}}</span>
   </ion-item>
 
-  <ion-item>
-    <ion-icon name="calendar" item-left large ></ion-icon>
-    <h2>Year:</h2>
-    <p>{{comic.year}}</p>
+  <ion-item text-wrap>
+    <ion-icon name="people"  large></ion-icon>
+    <span>Characters:</span>
+    <span>{{comic.charactersFinal}}</span>
+  </ion-item>
+  
+  <ion-item text-wrap>
+    <ion-icon name="calendar" large ></ion-icon>
+    <span>Year:</span>
+    <span>{{comic.year}}</span>
   </ion-item>
 
+  <ion-item text-wrap>
+    <ion-icon name="logo-usd"  large></ion-icon>
+    Prices   
+    <br>   
+    <span>&nbsp; Print: {{comic.prices[0].price}}</span>
+    <br>
+    <span>&nbsp; Digital: {{comic.prices[1].price}}</span>       
+  </ion-item>
 
-  <ion-item>
-    <span item-left>18 min</span>
-    <span item-left>(2.6 mi)</span>
-    <button ion-button icon-left clear item-end>
-      <ion-icon name="navigate"></ion-icon>
-      Start
+  <ion-item item-end  >
+    <a item-end [href]="comic.urls[1].url" >
+    <button ion-button icon-left clear item-end large>
+      Buy&nbsp; 
+      <ion-icon name="cart"></ion-icon>     
     </button>
+    </a>
+    
   </ion-item>
 
 </ion-card>
