@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
 import { comicsService } from '../../providers/comics-service/comics-service';
-import { DetailsPage } from '../../pages/details/details'
+import { DetailsPage } from '../../pages/details/details';
+import { LoadingController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -13,10 +14,15 @@ export class HomePage {
 
   constructor(
     public navCtrl: NavController,
-    public comicService: comicsService
+    public comicService: comicsService,
+    public loading: LoadingController
   ) { }
 
   ionViewDidLoad() {
+    let loader = this.loading.create({
+      content: 'Getting Comics...',
+    });  
+    loader.present().then(() => {
     this.comicService.getComics()
       .then(data => {
         this.comics = data.data.results;
@@ -25,11 +31,18 @@ export class HomePage {
       .catch(error => {
         console.error(error);
       })
+      loader.dismiss();
+    });
   }
-  getItems(ev: any) {
+  //Gets Comics for search value
+  getItems(ev: any) {  
+    let loader = this.loading.create({
+      content: 'Getting Comics...',
+    }); 
+    loader.present().then(() => {
     let val = ev.target.value;
     if (val && val.trim() != '') {      
-      if(val.length==4 && this.validateVal(val)){                 
+      if(val.length==4 && this.validateVal(val)){
         this.comicService.getComicsSearchYear(val)
         .then(data => {
           this.comics = data.data.results;                  
@@ -38,26 +51,29 @@ export class HomePage {
         .catch(error => {
           console.error(error);
         });
-
       }
-      else{      
-      this.comicService.getComicsSearchtitle(val)
+      else{ 
+      this.comicService.getComicsSearchTitle(val)
         .then(data => {
           this.comics = data.data.results;          
           this.validateComics();
         })
         .catch(error => {
           console.error(error);
-        })       
+        });  
       }      
     }
     else {
       this.ionViewDidLoad();
     }
+    loader.dismiss();
+  });
   }
+  //Call to page Details
   openNavDetailsPage(comic) {
     this.navCtrl.push(DetailsPage, { comic: comic });
   }
+  //validate the Comics 
   validateComics() {
     this.comics = this.comics.map(item => {
       //Validate Year
@@ -76,6 +92,7 @@ export class HomePage {
       return item;
     });
   }
+  //validate value of Search
   validateVal(val){
     var n = Math.floor(Number(val));
     return String(n) === val && n >= 0;

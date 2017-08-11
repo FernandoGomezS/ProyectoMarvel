@@ -80,18 +80,21 @@ var comicsService = (function () {
         this.privateKey = "edb8c96f8b36bd38946fb25207d7350de5ae3794";
         this.publicKey = "8b4b8bdebf950524d49ab01de18e69ad";
         this.hash = __WEBPACK_IMPORTED_MODULE_4_ts_md5_dist_md5__["Md5"].hashStr(this.ts + this.privateKey + this.publicKey);
-        this.limit = 50;
+        this.limit = 100;
     }
+    //Get Comics
     comicsService.prototype.getComics = function () {
         return this.http.get('https://gateway.marvel.com/v1/public/comics?ts=' + this.ts + '&apikey=' + this.publicKey + '&hash=' + this.hash + "&limit=" + this.limit + "&orderBy=-onsaleDate")
             .map(function (res) { return res.json(); })
             .toPromise();
     };
-    comicsService.prototype.getComicsSearchtitle = function (title) {
+    //Gets comic by title
+    comicsService.prototype.getComicsSearchTitle = function (title) {
         return this.http.get('https://gateway.marvel.com/v1/public/comics?ts=' + this.ts + "&titleStartsWith=" + title + '&apikey=' + this.publicKey + '&hash=' + this.hash + "&limit=" + this.limit + "&orderBy=-onsaleDate")
             .map(function (res) { return res.json(); })
             .toPromise();
     };
+    //Gets comic by year
     comicsService.prototype.getComicsSearchYear = function (year) {
         return this.http.get('https://gateway.marvel.com/v1/public/comics?ts=' + this.ts + "&startYear=" + year + '&apikey=' + this.publicKey + '&hash=' + this.hash + "&limit=" + this.limit + "&orderBy=-onsaleDate")
             .map(function (res) { return res.json(); })
@@ -234,7 +237,7 @@ var MyApp = (function () {
 MyApp = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"C:\Users\Fernando\Documents\GitHub\ProyectoMarvel\src\app\app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"C:\Users\Fernando\Documents\GitHub\ProyectoMarvel\src\app\app.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
 ], MyApp);
 
 //# sourceMappingURL=app.component.js.map
@@ -327,9 +330,9 @@ var DetailsPage = (function () {
 DetailsPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* IonicPage */])(),
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-details',template:/*ion-inline-start:"C:\Users\Fernando\Documents\GitHub\ProyectoMarvel\src\pages\details\details.html"*/'<ion-header>\n\n  <ion-navbar >\n\n    <ion-title >\n\n      {{ comic.title }}\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n\n\n<ion-card>\n\n\n\n  <img [src]="comic.src2"> \n\n\n\n  <ion-card-content>\n\n     <ion-card-title >\n\n        {{comic.title}}\n\n      </ion-card-title>\n\n      <span>\n\n       {{comic.description}}\n\n      </span>\n\n    </ion-card-content>\n\n\n\n    \n\n  <ion-item text-wrap >\n\n    <ion-icon name="clipboard"  large></ion-icon>\n\n    <span >Creators:</span>    \n\n    <span>{{comic.creatorsFinal}}</span>\n\n  </ion-item>\n\n\n\n  <ion-item text-wrap>\n\n    <ion-icon name="people"  large></ion-icon>\n\n    <span>Characters:</span>\n\n    <span>{{comic.charactersFinal}}</span>\n\n  </ion-item>\n\n  \n\n  <ion-item text-wrap>\n\n    <ion-icon name="calendar" large ></ion-icon>\n\n    <span>Year:</span>\n\n    <span>{{comic.year}}</span>\n\n  </ion-item>\n\n\n\n  <ion-item text-wrap>\n\n    <ion-icon name="logo-usd"  large></ion-icon>\n\n    Prices   \n\n    <br>   \n\n    <span>&nbsp; Print: {{comic.prices[0].price}}</span>\n\n    <br>\n\n    <span>&nbsp; Digital: {{comic.prices[1].price}}</span>       \n\n  </ion-item>\n\n\n\n  <ion-item item-end  >\n\n    <a item-end [href]="comic.urls[1].url" >\n\n    <button ion-button icon-left clear item-end large>\n\n      Buy&nbsp; \n\n      <ion-icon name="cart"></ion-icon>     \n\n    </button>\n\n    </a>\n\n    \n\n  </ion-item>\n\n\n\n</ion-card>\n\n</ion-content>\n\n\n\n\n\n'/*ion-inline-end:"C:\Users\Fernando\Documents\GitHub\ProyectoMarvel\src\pages\details\details.html"*/,
+        selector: 'page-details',template:/*ion-inline-start:"C:\Users\Fernando\Documents\GitHub\ProyectoMarvel\src\pages\details\details.html"*/'<ion-header>\n\n  <ion-navbar >\n\n    <ion-title >\n\n      {{ comic.title }}\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n\n\n<ion-card>\n\n\n\n  <img [src]="comic.src2"> \n\n\n\n  <ion-card-content>\n\n     <ion-card-title >\n\n        {{comic.title}}\n\n      </ion-card-title>\n\n      <span>\n\n       {{comic.description}}\n\n      </span>\n\n    </ion-card-content>\n\n\n\n    \n\n  <ion-item text-wrap >\n\n    <ion-icon name="clipboard"  large></ion-icon>\n\n    <span >Creators :</span>    \n\n    <span>{{comic.creatorsFinal}}</span>\n\n  </ion-item>\n\n\n\n  <ion-item text-wrap>\n\n    <ion-icon name="people"  large></ion-icon>\n\n    <span>Characters :</span>\n\n    <span>{{comic.charactersFinal}}</span>\n\n  </ion-item>\n\n  \n\n  <ion-item text-wrap>\n\n    <ion-icon name="calendar" large ></ion-icon>\n\n    <span>Year :</span>\n\n    <span>{{comic.year}}</span>\n\n  </ion-item>\n\n\n\n  <ion-item text-wrap>\n\n    <ion-icon name="logo-usd"  large></ion-icon>\n\n    Prices   \n\n    <br>   \n\n    <span>&nbsp; • Print : {{comic.prices[0].price}}</span>\n\n    <br>\n\n    <span>&nbsp; • Digital : {{comic.prices[1].price}}</span>       \n\n  </ion-item>\n\n\n\n  <ion-item item-end  >\n\n    <a item-end [href]="comic.urls[1].url" >\n\n    <button ion-button icon-left clear item-end large>\n\n      Buy&nbsp; \n\n      <ion-icon name="cart"></ion-icon>     \n\n    </button>\n\n    </a>\n\n    \n\n  </ion-item>\n\n\n\n</ion-card>\n\n</ion-content>\n\n\n\n\n\n'/*ion-inline-end:"C:\Users\Fernando\Documents\GitHub\ProyectoMarvel\src\pages\details\details.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]])
 ], DetailsPage);
 
 //# sourceMappingURL=details.js.map
@@ -358,55 +361,72 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var HomePage = (function () {
-    function HomePage(navCtrl, comicService) {
+    function HomePage(navCtrl, comicService, loading) {
         this.navCtrl = navCtrl;
         this.comicService = comicService;
+        this.loading = loading;
         this.comics = [];
     }
     HomePage.prototype.ionViewDidLoad = function () {
         var _this = this;
-        this.comicService.getComics()
-            .then(function (data) {
-            _this.comics = data.data.results;
-            _this.validateComics();
-        })
-            .catch(function (error) {
-            console.error(error);
+        var loader = this.loading.create({
+            content: 'Getting Comics...',
+        });
+        loader.present().then(function () {
+            _this.comicService.getComics()
+                .then(function (data) {
+                _this.comics = data.data.results;
+                _this.validateComics();
+            })
+                .catch(function (error) {
+                console.error(error);
+            });
+            loader.dismiss();
         });
     };
+    //Gets Comics for search value
     HomePage.prototype.getItems = function (ev) {
         var _this = this;
-        var val = ev.target.value;
-        if (val && val.trim() != '') {
-            if (val.length == 4 && this.validateVal(val)) {
-                this.comicService.getComicsSearchYear(val)
-                    .then(function (data) {
-                    _this.comics = data.data.results;
-                    _this.validateComics();
-                })
-                    .catch(function (error) {
-                    console.error(error);
-                });
+        var loader = this.loading.create({
+            content: 'Getting Comics...',
+        });
+        loader.present().then(function () {
+            var val = ev.target.value;
+            if (val && val.trim() != '') {
+                if (val.length == 4 && _this.validateVal(val)) {
+                    _this.comicService.getComicsSearchYear(val)
+                        .then(function (data) {
+                        _this.comics = data.data.results;
+                        _this.validateComics();
+                    })
+                        .catch(function (error) {
+                        console.error(error);
+                    });
+                }
+                else {
+                    _this.comicService.getComicsSearchTitle(val)
+                        .then(function (data) {
+                        _this.comics = data.data.results;
+                        _this.validateComics();
+                    })
+                        .catch(function (error) {
+                        console.error(error);
+                    });
+                }
             }
             else {
-                this.comicService.getComicsSearchtitle(val)
-                    .then(function (data) {
-                    _this.comics = data.data.results;
-                    _this.validateComics();
-                })
-                    .catch(function (error) {
-                    console.error(error);
-                });
+                _this.ionViewDidLoad();
             }
-        }
-        else {
-            this.ionViewDidLoad();
-        }
+            loader.dismiss();
+        });
     };
+    //Call to page Details
     HomePage.prototype.openNavDetailsPage = function (comic) {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__pages_details_details__["a" /* DetailsPage */], { comic: comic });
     };
+    //validate the Comics 
     HomePage.prototype.validateComics = function () {
         this.comics = this.comics.map(function (item) {
             //Validate Year
@@ -425,6 +445,7 @@ var HomePage = (function () {
             return item;
         });
     };
+    //validate value of Search
     HomePage.prototype.validateVal = function (val) {
         var n = Math.floor(Number(val));
         return String(n) === val && n >= 0;
@@ -436,10 +457,10 @@ HomePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
         selector: 'page-home',template:/*ion-inline-start:"C:\Users\Fernando\Documents\GitHub\ProyectoMarvel\src\pages\home\home.html"*/'<ion-header >\n\n  <ion-navbar >\n\n    <ion-title >\n\n      <img alt="logo" height="40" src="assets/img/logo.png">\n\n    </ion-title>\n\n  </ion-navbar>\n\n  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>\n\n  \n\n</ion-header>\n\n\n\n<ion-content>\n\n  <ion-list>\n\n    <button ion-item *ngFor="let comic of comics" (click)="openNavDetailsPage(comic)">\n\n      <ion-thumbnail item-start>\n\n      <img [src]="comic.src">\n\n    </ion-thumbnail>\n\n    <h2>{{ comic.title }}</h2>\n\n    <p>Year •{{comic.year}}</p>    \n\n    </button>\n\n  </ion-list>\n\n</ion-content>'/*ion-inline-end:"C:\Users\Fernando\Documents\GitHub\ProyectoMarvel\src\pages\home\home.html"*/,
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__providers_comics_service_comics_service__["a" /* comicsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_comics_service_comics_service__["a" /* comicsService */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__providers_comics_service_comics_service__["a" /* comicsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_comics_service_comics_service__["a" /* comicsService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */]) === "function" && _c || Object])
 ], HomePage);
 
-var _a, _b;
+var _a, _b, _c;
 //# sourceMappingURL=home.js.map
 
 /***/ })

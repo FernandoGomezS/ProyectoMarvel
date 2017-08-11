@@ -10,34 +10,28 @@ export class comicsService {
   privateKey="edb8c96f8b36bd38946fb25207d7350de5ae3794";
   publicKey="8b4b8bdebf950524d49ab01de18e69ad";
   hash=Md5.hashStr(this.ts+this.privateKey+this.publicKey);
-  limit =50;
+  limit =100;
   constructor(
     private http: Http
     
-  ) {
-     
-  }
-
-  getComics() { 
-    
+  ) {   }
+  //Get Comics
+  getComics() {     
     return this.http.get('https://gateway.marvel.com/v1/public/comics?ts='+this.ts+'&apikey='+this.publicKey+'&hash='+this.hash+"&limit="+this.limit+"&orderBy=-onsaleDate")
     .map(res => res.json())
-    .toPromise();
-    
+    .toPromise();    
   }
-  getComicsSearchtitle(title) {      
-    
+  //Gets comic by title
+  getComicsSearchTitle(title) { 
     return this.http.get('https://gateway.marvel.com/v1/public/comics?ts='+this.ts+"&titleStartsWith="+title+'&apikey='+this.publicKey+'&hash='+this.hash+"&limit="+this.limit+"&orderBy=-onsaleDate")
     .map(res => res.json())
-    .toPromise();
-    
+    .toPromise();    
   }
-  getComicsSearchYear(year) {      
-    
+  //Gets comic by year
+  getComicsSearchYear(year) { 
     return this.http.get('https://gateway.marvel.com/v1/public/comics?ts='+this.ts+"&startYear="+year+'&apikey='+this.publicKey+'&hash='+this.hash+"&limit="+this.limit+"&orderBy=-onsaleDate")
     .map(res => res.json())
-    .toPromise();
-    
+    .toPromise();    
   }
 
   
