@@ -5,11 +5,9 @@
   "homepage": "http://ionicframework.com/",
   "private": true,
   "scripts": {
-    "dev": "node server.js",
-    "build": "ionic-app-scripts build",
-    "postinstall": "npm run build",
-    "start": "node server.js",
+    "start": "NODE_ENV=production node server.js",
     "clean": "ionic-app-scripts clean",
+    "build": "ionic-app-scripts build",
     "lint": "ionic-app-scripts lint",
     "ionic:build": "ionic-app-scripts build",
     "ionic:serve": "ionic-app-scripts serve"
@@ -32,6 +30,7 @@
     "ionicons": "3.0.0",
     "rxjs": "5.4.0",
     "sw-toolbox": "3.6.0",
+    "ts-md5": "^1.2.2",
     "zone.js": "0.8.12"
   },
   "devDependencies": {
