@@ -80,7 +80,7 @@ var comicsService = (function () {
         this.privateKey = "edb8c96f8b36bd38946fb25207d7350de5ae3794";
         this.publicKey = "8b4b8bdebf950524d49ab01de18e69ad";
         this.hash = __WEBPACK_IMPORTED_MODULE_4_ts_md5_dist_md5__["Md5"].hashStr(this.ts + this.privateKey + this.publicKey);
-        this.limit = 100;
+        this.limit = 50;
     }
     //Get Comics
     comicsService.prototype.getComics = function () {
@@ -104,9 +104,10 @@ var comicsService = (function () {
 }());
 comicsService = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]) === "function" && _a || Object])
 ], comicsService);
 
+var _a;
 //# sourceMappingURL=comics-service.js.map
 
 /***/ }),

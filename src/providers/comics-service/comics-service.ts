@@ -10,7 +10,7 @@ export class comicsService {
   privateKey="edb8c96f8b36bd38946fb25207d7350de5ae3794";
   publicKey="8b4b8bdebf950524d49ab01de18e69ad";
   hash=Md5.hashStr(this.ts+this.privateKey+this.publicKey);
-  limit =100;
+  limit =50;
   constructor(
     private http: Http
     
