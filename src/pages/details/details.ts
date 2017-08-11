@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, } from 'ionic-angular';
+
 
 /**
  * Generated class for the NewDetailPage page.
@@ -14,7 +15,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class DetailsPage {
   comic;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+     public navParams: NavParams,    
+    ) {
 
     this.comic = navParams.data.comic;
     //Validate creators 
@@ -70,7 +74,5 @@ export class DetailsPage {
       
   }
   ionViewDidLoad() {
-  }
-
-
+  } 
 }

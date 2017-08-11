@@ -132,7 +132,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(38);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(192);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__ = __webpack_require__(195);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(267);
@@ -203,7 +203,7 @@ AppModule = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(38);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(195);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(192);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(99);
@@ -249,7 +249,7 @@ MyApp = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DetailsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(38);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -329,11 +329,12 @@ var DetailsPage = (function () {
 DetailsPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* IonicPage */])(),
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-details',template:/*ion-inline-start:"C:\Users\Fernando\Documents\GitHub\ProyectoMarvel\src\pages\details\details.html"*/'<ion-header>\n  <ion-navbar >\n    <ion-title >\n      {{ comic.title }}\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n\n<ion-card>\n\n  <img [src]="comic.src2"> \n\n  <ion-card-content>\n     <ion-card-title >\n        {{comic.title}}\n      </ion-card-title>\n      <span>\n       {{comic.description}}\n      </span>\n    </ion-card-content>\n\n    \n  <ion-item text-wrap >\n    <ion-icon name="clipboard"  large></ion-icon>\n    <span >Creators :</span>    \n    <span>{{comic.creatorsFinal}}</span>\n  </ion-item>\n\n  <ion-item text-wrap>\n    <ion-icon name="people"  large></ion-icon>\n    <span>Characters :</span>\n    <span>{{comic.charactersFinal}}</span>\n  </ion-item>\n  \n  <ion-item text-wrap>\n    <ion-icon name="calendar" large ></ion-icon>\n    <span>Year :</span>\n    <span>{{comic.year}}</span>\n  </ion-item>\n\n  <ion-item text-wrap>\n    <ion-icon name="logo-usd"  large></ion-icon>\n    Prices   \n    <br>   \n    <span>&nbsp; • Print : {{comic.prices[0].price}}</span>\n    <br>\n    <span>&nbsp; • Digital : {{comic.prices[1].price}}</span>       \n  </ion-item>\n\n  <ion-item item-end  >\n    <a item-end [href]="comic.urls[1].url" >\n    <button ion-button icon-left clear item-end large>\n      Buy&nbsp; \n      <ion-icon name="cart"></ion-icon>     \n    </button>\n    </a>\n    \n  </ion-item>\n\n</ion-card>\n</ion-content>\n\n\n'/*ion-inline-end:"C:\Users\Fernando\Documents\GitHub\ProyectoMarvel\src\pages\details\details.html"*/,
+        selector: 'page-details',template:/*ion-inline-start:"C:\Users\Fernando\Documents\GitHub\ProyectoMarvel\src\pages\details\details.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      {{ comic.title }}\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n\n  <ion-card>\n    <img [src]="comic.src2">\n    <ion-card-content>\n      <span style="font-size:1.8em;color:#f53d3d">\n        {{comic.title}}\n        </span>\n      <br>\n      <span>\n       {{comic.description}}\n      </span>\n    </ion-card-content>\n\n    <ion-item text-wrap>\n      <ion-icon name="clipboard" large></ion-icon>\n      <span style="color:#666;">Creators :</span>\n      <span>{{comic.creatorsFinal}}</span>\n    </ion-item>\n\n    <ion-item text-wrap>\n      <ion-icon name="people" large></ion-icon>\n      <span style="color:#666;">Characters :</span>\n      <span>{{comic.charactersFinal}}</span>\n    </ion-item>\n\n    <ion-item text-wrap>\n      <ion-icon name="calendar" large></ion-icon>\n      <span style="color:#666;">Year :</span>\n      <span>{{comic.year}}</span>\n    </ion-item>\n\n    <ion-item text-wrap>\n      <ion-icon name="logo-usd" large></ion-icon>\n      <span style="color:#666;">Prices :</span>\n      <br>\n      <span>&nbsp; • Print : {{comic.prices[0].price}}</span>\n      <br>\n      <span>&nbsp; • Digital : {{comic.prices[1].price}}</span>\n    </ion-item>\n\n    <ion-item text-wrap item-end *ngIf=\'comic.urls[1].url != "#"\'>\n      <a item-end [href]="comic.urls[1].url">\n    <button ion-button icon-left clear item-end large>\n      Buy&nbsp; \n      <ion-icon name="cart"></ion-icon>     \n    </button>\n    </a>\n    </ion-item>\n    \n    <ion-item text-wrap item-end *ngIf=\'comic.urls[1].url == "#"\'>\n      <span style="color:#f53d3d;" item-end icon-left large>Not available to buy</span>\n    </ion-item>\n\n  </ion-card>\n</ion-content>'/*ion-inline-end:"C:\Users\Fernando\Documents\GitHub\ProyectoMarvel\src\pages\details\details.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]) === "function" && _b || Object])
 ], DetailsPage);
 
+var _a, _b;
 //# sourceMappingURL=details.js.map
 
 /***/ }),
@@ -344,7 +345,7 @@ DetailsPage = __decorate([
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(38);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_comics_service_comics_service__ = __webpack_require__(151);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_details_details__ = __webpack_require__(98);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -356,7 +357,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
 
 
 
@@ -450,10 +450,11 @@ HomePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
         selector: 'page-home',template:/*ion-inline-start:"C:\Users\Fernando\Documents\GitHub\ProyectoMarvel\src\pages\home\home.html"*/'<ion-header >\n  <ion-navbar >\n    <ion-title >\n      <img alt="logo" height="40" src="assets/img/logo.png">\n    </ion-title>\n  </ion-navbar>\n  <ion-searchbar placeholder="Search by Title or Year" (ionInput)="getItems($event)"></ion-searchbar>\n  \n</ion-header>\n\n<ion-content>\n  <ion-list>\n    <button ion-item *ngFor="let comic of comics" (click)="openNavDetailsPage(comic)">\n      <ion-thumbnail item-start>\n      <img [src]="comic.src">\n    </ion-thumbnail>\n    <h2>{{ comic.title }}</h2>\n    <p>Year •{{comic.year}}</p>    \n    </button>\n  </ion-list>\n</ion-content>'/*ion-inline-end:"C:\Users\Fernando\Documents\GitHub\ProyectoMarvel\src\pages\home\home.html"*/,
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__providers_comics_service_comics_service__["a" /* comicsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_comics_service_comics_service__["a" /* comicsService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */]) === "function" && _c || Object])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */],
+        __WEBPACK_IMPORTED_MODULE_2__providers_comics_service_comics_service__["a" /* comicsService */],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */]])
 ], HomePage);
 
-var _a, _b, _c;
 //# sourceMappingURL=home.js.map
 
 /***/ })

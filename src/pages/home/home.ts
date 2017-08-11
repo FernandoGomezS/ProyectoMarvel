@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import { IonicPage, NavController, LoadingController } from 'ionic-angular';
 import { comicsService } from '../../providers/comics-service/comics-service';
 import { DetailsPage } from '../../pages/details/details';
-import { LoadingController } from 'ionic-angular';
+
+
 
 @IonicPage()
 @Component({
@@ -15,7 +16,7 @@ export class HomePage {
   constructor(
     public navCtrl: NavController,
     public comicService: comicsService,
-    public loading: LoadingController
+    public loading: LoadingController    
   ) { }
 
   ionViewDidLoad() {
@@ -90,5 +91,5 @@ export class HomePage {
   validateVal(val) {
     var n = Math.floor(Number(val));
     return String(n) === val && n >= 0;
-  }
+  } 
 }
