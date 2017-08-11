@@ -4,10 +4,12 @@
   "author": "Fernando Gómez",
   "homepage": "http://ionicframework.com/",
   "private": true,
-  "scripts": {
-    "start": "node server.js",
-    "clean": "ionic-app-scripts clean",
-    "build": "ionic-app-scripts build",
+  "scripts": {    
+    "dev": "node server.js",
+    "build": "next build",
+    "postinstall": "npm run build",
+    "start": "NODE_ENV=production node server.js",
+    "clean": "ionic-app-scripts clean",    
     "lint": "ionic-app-scripts lint",
     "ionic:build": "ionic-app-scripts build",
     "ionic:serve": "ionic-app-scripts serve"
@@ -38,14 +40,5 @@
     "ionic": "3.7.0",
     "typescript": "2.3.4"
   },
-  "description": "An Ionic project",
-  "main": "app.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/FernandoGomezS/ProyectoMarvel.git"
-  },
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/FernandoGomezS/ProyectoMarvel/issues"
-  }
+  "description": "An Ionic project"
 }
