@@ -5,7 +5,9 @@
   "homepage": "http://ionicframework.com/",
   "private": true,
   "scripts": {
-    "start": "node server.js",
+    "dev": "next",	
+		"start": "next start",
+		"heroku-postbuild": "next build",
     "clean": "ionic-app-scripts clean",
     "build": "ionic-app-scripts build",
     "lint": "ionic-app-scripts lint",
