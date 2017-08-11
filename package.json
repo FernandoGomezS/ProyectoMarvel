@@ -4,12 +4,12 @@
   "author": "Fernando Gómez",
   "homepage": "http://ionicframework.com/",
   "private": true,
-  "scripts": {
-    "dev": "next",	
-		"start": "next start",
-		"heroku-postbuild": "next build",
-    "clean": "ionic-app-scripts clean",
-    "build": "ionic-app-scripts build",
+  "scripts": {    
+    "dev": "node server.js",
+    "build": "next build",
+    "postinstall": "npm run build",
+    "start": "NODE_ENV=production node server.js",
+    "clean": "ionic-app-scripts clean",    
     "lint": "ionic-app-scripts lint",
     "ionic:build": "ionic-app-scripts build",
     "ionic:serve": "ionic-app-scripts serve"
