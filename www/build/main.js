@@ -80,23 +80,23 @@ var comicsService = (function () {
         this.privateKey = "edb8c96f8b36bd38946fb25207d7350de5ae3794";
         this.publicKey = "8b4b8bdebf950524d49ab01de18e69ad";
         this.hash = __WEBPACK_IMPORTED_MODULE_4_ts_md5_dist_md5__["Md5"].hashStr(this.ts + this.privateKey + this.publicKey);
-        this.limit = 50;
+        this.limit = 20;
     }
     //Get Comics
     comicsService.prototype.getComics = function () {
-        return this.http.get('https://gateway.marvel.com/v1/public/comics?ts=' + this.ts + '&apikey=' + this.publicKey + '&hash=' + this.hash + "&limit=" + this.limit + "&orderBy=-onsaleDate")
+        return this.http.get('https://gateway.marvel.com/v1/public/comics?ts=' + this.ts + '&apikey=' + this.publicKey + '&hash=' + this.hash + "&limit=" + this.limit)
             .map(function (res) { return res.json(); })
             .toPromise();
     };
     //Gets comic by title
     comicsService.prototype.getComicsSearchTitle = function (title) {
-        return this.http.get('https://gateway.marvel.com/v1/public/comics?ts=' + this.ts + "&titleStartsWith=" + title + '&apikey=' + this.publicKey + '&hash=' + this.hash + "&limit=" + this.limit + "&orderBy=-onsaleDate")
+        return this.http.get('https://gateway.marvel.com/v1/public/comics?ts=' + this.ts + "&titleStartsWith=" + title + '&apikey=' + this.publicKey + '&hash=' + this.hash + "&limit=" + this.limit)
             .map(function (res) { return res.json(); })
             .toPromise();
     };
     //Gets comic by year
     comicsService.prototype.getComicsSearchYear = function (year) {
-        return this.http.get('https://gateway.marvel.com/v1/public/comics?ts=' + this.ts + "&startYear=" + year + '&apikey=' + this.publicKey + '&hash=' + this.hash + "&limit=" + this.limit + "&orderBy=-onsaleDate")
+        return this.http.get('https://gateway.marvel.com/v1/public/comics?ts=' + this.ts + "&startYear=" + year + '&apikey=' + this.publicKey + '&hash=' + this.hash + "&limit=" + this.limit)
             .map(function (res) { return res.json(); })
             .toPromise();
     };
@@ -332,10 +332,10 @@ DetailsPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
         selector: 'page-details',template:/*ion-inline-start:"C:\Users\Fernando\Documents\GitHub\ProyectoMarvel\src\pages\details\details.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      {{ comic.title }}\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n\n  <ion-card>\n    <img [src]="comic.src2">\n    <ion-card-content>\n      <span style="font-size:1.8em;color:#f53d3d">\n        {{comic.title}}\n        </span>\n      <br>\n      <span>\n       {{comic.description}}\n      </span>\n    </ion-card-content>\n\n    <ion-item text-wrap>\n      <ion-icon name="clipboard" large></ion-icon>\n      <span style="color:#666;">Creators :</span>\n      <span>{{comic.creatorsFinal}}</span>\n    </ion-item>\n\n    <ion-item text-wrap>\n      <ion-icon name="people" large></ion-icon>\n      <span style="color:#666;">Characters :</span>\n      <span>{{comic.charactersFinal}}</span>\n    </ion-item>\n\n    <ion-item text-wrap>\n      <ion-icon name="calendar" large></ion-icon>\n      <span style="color:#666;">Year :</span>\n      <span>{{comic.year}}</span>\n    </ion-item>\n\n    <ion-item text-wrap>\n      <ion-icon name="logo-usd" large></ion-icon>\n      <span style="color:#666;">Prices :</span>\n      <br>\n      <span>&nbsp; • Print : {{comic.prices[0].price}}</span>\n      <br>\n      <span>&nbsp; • Digital : {{comic.prices[1].price}}</span>\n    </ion-item>\n\n    <ion-item text-wrap item-end *ngIf=\'comic.urls[1].url != "#"\'>\n      <a item-end [href]="comic.urls[1].url">\n    <button ion-button icon-left clear item-end large>\n      Buy&nbsp; \n      <ion-icon name="cart"></ion-icon>     \n    </button>\n    </a>\n    </ion-item>\n    \n    <ion-item text-wrap item-end *ngIf=\'comic.urls[1].url == "#"\'>\n      <span style="color:#f53d3d;" item-end icon-left large>Not available to buy</span>\n    </ion-item>\n\n  </ion-card>\n</ion-content>'/*ion-inline-end:"C:\Users\Fernando\Documents\GitHub\ProyectoMarvel\src\pages\details\details.html"*/,
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]])
 ], DetailsPage);
 
-var _a, _b;
 //# sourceMappingURL=details.js.map
 
 /***/ }),
@@ -451,11 +451,10 @@ HomePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
         selector: 'page-home',template:/*ion-inline-start:"C:\Users\Fernando\Documents\GitHub\ProyectoMarvel\src\pages\home\home.html"*/'<ion-header >\n  <ion-navbar >\n    <ion-title >\n      <img alt="logo" height="40" src="assets/img/logo.png">\n    </ion-title>\n  </ion-navbar>\n  <ion-searchbar placeholder="Search by Title or Year" (ionInput)="getItems($event)"></ion-searchbar>\n  \n</ion-header>\n\n<ion-content>\n  <ion-list>\n    <button ion-item *ngFor="let comic of comics" (click)="openNavDetailsPage(comic)">\n      <ion-thumbnail item-start>\n      <img [src]="comic.src">\n    </ion-thumbnail>\n    <h2>{{ comic.title }}</h2>\n    <p>Year •{{comic.year}}</p>    \n    </button>\n  </ion-list>\n</ion-content>'/*ion-inline-end:"C:\Users\Fernando\Documents\GitHub\ProyectoMarvel\src\pages\home\home.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */],
-        __WEBPACK_IMPORTED_MODULE_2__providers_comics_service_comics_service__["a" /* comicsService */],
-        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__providers_comics_service_comics_service__["a" /* comicsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_comics_service_comics_service__["a" /* comicsService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */]) === "function" && _c || Object])
 ], HomePage);
 
+var _a, _b, _c;
 //# sourceMappingURL=home.js.map
 
 /***/ })
