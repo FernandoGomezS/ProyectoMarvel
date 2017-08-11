@@ -83,7 +83,7 @@ var comicsService = (function () {
         var publicKey = "8b4b8bdebf950524d49ab01de18e69ad";
         var hash = __WEBPACK_IMPORTED_MODULE_4_ts_md5_dist_md5__["Md5"].hashStr(ts + privateKey + publicKey);
         var limit = 100;
-        return this.http.get('http://gateway.marvel.com/v1/public/comics?ts=' + ts + "&startYear=2002" + '&apikey=' + publicKey + '&hash=' + hash + "&limit=" + limit + "&orderBy=-onsaleDate")
+        return this.http.get('https://gateway.marvel.com/v1/public/comics?ts=' + ts + "&startYear=2002" + '&apikey=' + publicKey + '&hash=' + hash + "&limit=" + limit + "&orderBy=-onsaleDate")
             .map(function (res) { return res.json(); })
             .toPromise();
     };

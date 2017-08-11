@@ -18,7 +18,7 @@ export class comicsService {
     var publicKey="8b4b8bdebf950524d49ab01de18e69ad";
     var hash=Md5.hashStr(ts+privateKey+publicKey);
     var limit =100;
-    return this.http.get('http://gateway.marvel.com/v1/public/comics?ts='+ts+"&startYear=2002"+'&apikey='+publicKey+'&hash='+hash+"&limit="+limit+"&orderBy=-onsaleDate")
+    return this.http.get('https://gateway.marvel.com/v1/public/comics?ts='+ts+"&startYear=2002"+'&apikey='+publicKey+'&hash='+hash+"&limit="+limit+"&orderBy=-onsaleDate")
     .map(res => res.json())
     .toPromise();
     
