@@ -76,14 +76,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var comicsService = (function () {
     function comicsService(http) {
         this.http = http;
+        this.ts = 1;
+        this.privateKey = "edb8c96f8b36bd38946fb25207d7350de5ae3794";
+        this.publicKey = "8b4b8bdebf950524d49ab01de18e69ad";
+        this.hash = __WEBPACK_IMPORTED_MODULE_4_ts_md5_dist_md5__["Md5"].hashStr(this.ts + this.privateKey + this.publicKey);
+        this.limit = 50;
     }
-    comicsService.prototype.getcomics = function () {
-        var ts = 1;
-        var privateKey = "edb8c96f8b36bd38946fb25207d7350de5ae3794";
-        var publicKey = "8b4b8bdebf950524d49ab01de18e69ad";
-        var hash = __WEBPACK_IMPORTED_MODULE_4_ts_md5_dist_md5__["Md5"].hashStr(ts + privateKey + publicKey);
-        var limit = 100;
-        return this.http.get('https://gateway.marvel.com/v1/public/comics?ts=' + ts + "&startYear=2002" + '&apikey=' + publicKey + '&hash=' + hash + "&limit=" + limit + "&orderBy=-onsaleDate")
+    comicsService.prototype.getComics = function () {
+        return this.http.get('https://gateway.marvel.com/v1/public/comics?ts=' + this.ts + '&apikey=' + this.publicKey + '&hash=' + this.hash + "&limit=" + this.limit + "&orderBy=-onsaleDate")
+            .map(function (res) { return res.json(); })
+            .toPromise();
+    };
+    comicsService.prototype.getComicsSearchtitle = function (title) {
+        return this.http.get('https://gateway.marvel.com/v1/public/comics?ts=' + this.ts + "&titleStartsWith=" + title + '&apikey=' + this.publicKey + '&hash=' + this.hash + "&limit=" + this.limit + "&orderBy=-onsaleDate")
+            .map(function (res) { return res.json(); })
+            .toPromise();
+    };
+    comicsService.prototype.getComicsSearchYear = function (year) {
+        return this.http.get('https://gateway.marvel.com/v1/public/comics?ts=' + this.ts + "&startYear=" + year + '&apikey=' + this.publicKey + '&hash=' + this.hash + "&limit=" + this.limit + "&orderBy=-onsaleDate")
             .map(function (res) { return res.json(); })
             .toPromise();
     };
@@ -91,9 +101,10 @@ var comicsService = (function () {
 }());
 comicsService = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]) === "function" && _a || Object])
 ], comicsService);
 
+var _a;
 //# sourceMappingURL=comics-service.js.map
 
 /***/ }),
@@ -352,48 +363,71 @@ var HomePage = (function () {
         this.navCtrl = navCtrl;
         this.comicService = comicService;
         this.comics = [];
-        this.searchQuery = '';
     }
     HomePage.prototype.ionViewDidLoad = function () {
         var _this = this;
-        this.comicService.getcomics()
+        this.comicService.getComics()
             .then(function (data) {
             _this.comics = data.data.results;
-            _this.comics = _this.comics.map(function (item) {
-                //Validate Year
-                var validate = /\((.[0-9]*)\)/;
-                if (validate.test(item.title) == false) {
-                    item.year = (new Date(item.dates[0].date)).getFullYear(); //Get from date onsaleDate
-                }
-                else {
-                    item.year = item.title.match(/\((.[0-9]*)\)/).pop(); //Get from title
-                }
-                //Validate Title         
-                item.title = item.title.replace(/\((.*)\)/, "");
-                //Validate Imgs
-                item.src = item.thumbnail.path + "/portrait_small." + item.thumbnail.extension;
-                item.src2 = item.thumbnail.path + "/portrait_incredible." + item.thumbnail.extension;
-                return item;
-            });
+            _this.validateComics();
         })
             .catch(function (error) {
             console.error(error);
         });
     };
     HomePage.prototype.getItems = function (ev) {
-        // Reset items back to all of the items
-        this.ionViewDidLoad();
-        // set val to the value of the searchbar
+        var _this = this;
         var val = ev.target.value;
-        // if the value is an empty string don't filter the items
         if (val && val.trim() != '') {
-            this.comics = this.comics.filter(function (item) {
-                return (item.title.toLowerCase().indexOf(val.toLowerCase()) > -1);
-            });
+            if (val.length == 4 && this.validateVal(val)) {
+                this.comicService.getComicsSearchYear(val)
+                    .then(function (data) {
+                    _this.comics = data.data.results;
+                    _this.validateComics();
+                })
+                    .catch(function (error) {
+                    console.error(error);
+                });
+            }
+            else {
+                this.comicService.getComicsSearchtitle(val)
+                    .then(function (data) {
+                    _this.comics = data.data.results;
+                    _this.validateComics();
+                })
+                    .catch(function (error) {
+                    console.error(error);
+                });
+            }
+        }
+        else {
+            this.ionViewDidLoad();
         }
     };
     HomePage.prototype.openNavDetailsPage = function (comic) {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__pages_details_details__["a" /* DetailsPage */], { comic: comic });
+    };
+    HomePage.prototype.validateComics = function () {
+        this.comics = this.comics.map(function (item) {
+            //Validate Year
+            var validate = /\((.[0-9]*)\)/;
+            if (validate.test(item.title) == false) {
+                item.year = (new Date(item.dates[0].date)).getFullYear(); //Get from date onsaleDate
+            }
+            else {
+                item.year = item.title.match(/\((.[0-9]*)\)/).pop(); //Get from title
+            }
+            //Validate Title         
+            item.title = item.title.replace(/\((.*)\)/, "");
+            //Validate Imgs
+            item.src = item.thumbnail.path + "/portrait_medium." + item.thumbnail.extension;
+            item.src2 = item.thumbnail.path + "/portrait_incredible." + item.thumbnail.extension;
+            return item;
+        });
+    };
+    HomePage.prototype.validateVal = function (val) {
+        var n = Math.floor(Number(val));
+        return String(n) === val && n >= 0;
     };
     return HomePage;
 }());
@@ -402,10 +436,10 @@ HomePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
         selector: 'page-home',template:/*ion-inline-start:"C:\Users\Fernando\Documents\GitHub\ProyectoMarvel\src\pages\home\home.html"*/'<ion-header >\n\n  <ion-navbar >\n\n    <ion-title >\n\n      <img alt="logo" height="40" src="assets/img/logo.png">\n\n    </ion-title>\n\n  </ion-navbar>\n\n  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>\n\n  \n\n</ion-header>\n\n\n\n<ion-content>\n\n  <ion-list>\n\n    <button ion-item *ngFor="let comic of comics" (click)="openNavDetailsPage(comic)">\n\n      <ion-thumbnail item-start>\n\n      <img [src]="comic.src">\n\n    </ion-thumbnail>\n\n    <h2>{{ comic.title }}</h2>\n\n    <p>Year •{{comic.year}}</p>    \n\n    </button>\n\n  </ion-list>\n\n</ion-content>'/*ion-inline-end:"C:\Users\Fernando\Documents\GitHub\ProyectoMarvel\src\pages\home\home.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */],
-        __WEBPACK_IMPORTED_MODULE_2__providers_comics_service_comics_service__["a" /* comicsService */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__providers_comics_service_comics_service__["a" /* comicsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_comics_service_comics_service__["a" /* comicsService */]) === "function" && _b || Object])
 ], HomePage);
 
+var _a, _b;
 //# sourceMappingURL=home.js.map
 
 /***/ })

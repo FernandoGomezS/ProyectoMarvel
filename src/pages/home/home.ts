@@ -9,9 +9,7 @@ import { DetailsPage } from '../../pages/details/details'
   templateUrl: 'home.html',
 })
 export class HomePage {
-
   comics: any[] = [];
-  searchQuery: string = '';
 
   constructor(
     public navCtrl: NavController,
@@ -19,49 +17,69 @@ export class HomePage {
   ) { }
 
   ionViewDidLoad() {
-    this.comicService.getcomics()
+    this.comicService.getComics()
       .then(data => {
         this.comics = data.data.results;
-
-        this.comics = this.comics.map(item => {
-          //Validate Year
-          var validate = /\((.[0-9]*)\)/;
-          if (validate.test(item.title) == false) {
-            item.year = (new Date(item.dates[0].date)).getFullYear(); //Get from date onsaleDate
-          }
-          else {
-            item.year = item.title.match(/\((.[0-9]*)\)/).pop(); //Get from title
-          }
-          //Validate Title         
-          item.title = item.title.replace(/\((.*)\)/, "");
-          //Validate Imgs
-          item.src = item.thumbnail.path + "/portrait_small." + item.thumbnail.extension;
-          item.src2 = item.thumbnail.path + "/portrait_incredible." + item.thumbnail.extension;
-          return item;
-        });
-
+        this.validateComics();
       })
       .catch(error => {
         console.error(error);
       })
-
-
   }
   getItems(ev: any) {
-    // Reset items back to all of the items
-    this.ionViewDidLoad();
-
-    // set val to the value of the searchbar
     let val = ev.target.value;
+    if (val && val.trim() != '') {      
+      if(val.length==4 && this.validateVal(val)){                 
+        this.comicService.getComicsSearchYear(val)
+        .then(data => {
+          this.comics = data.data.results;                  
+          this.validateComics();          
+        })
+        .catch(error => {
+          console.error(error);
+        });
 
-    // if the value is an empty string don't filter the items
-    if (val && val.trim() != '') {
-      this.comics = this.comics.filter((item) => {
-        return (item.title.toLowerCase().indexOf(val.toLowerCase()) > -1);
-      })
+      }
+      else{      
+      this.comicService.getComicsSearchtitle(val)
+        .then(data => {
+          this.comics = data.data.results;          
+          this.validateComics();
+        })
+        .catch(error => {
+          console.error(error);
+        })       
+      }      
+    }
+    else {
+      this.ionViewDidLoad();
     }
   }
   openNavDetailsPage(comic) {
     this.navCtrl.push(DetailsPage, { comic: comic });
+  }
+  validateComics() {
+    this.comics = this.comics.map(item => {
+      //Validate Year
+      var validate = /\((.[0-9]*)\)/;
+      if (validate.test(item.title) == false) {
+        item.year = (new Date(item.dates[0].date)).getFullYear(); //Get from date onsaleDate
+      }
+      else {
+        item.year = item.title.match(/\((.[0-9]*)\)/).pop(); //Get from title
+      }
+      //Validate Title         
+      item.title = item.title.replace(/\((.*)\)/, "");
+      //Validate Imgs
+      item.src = item.thumbnail.path + "/portrait_medium." + item.thumbnail.extension;
+      item.src2 = item.thumbnail.path + "/portrait_incredible." + item.thumbnail.extension;
+      return item;
+    });
+  }
+  validateVal(val){
+    var n = Math.floor(Number(val));
+    return String(n) === val && n >= 0;
+    
+
   }
 }
